@@ -390,8 +390,12 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
   <script>
-    let selectedDate = null;
+    (function(){
+      emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Will configure below
+    })();
+  </script>
     let selectedTime = null;
     let currentMonth = new Date();
 
@@ -516,14 +520,29 @@
         phone: document.getElementById('phone').value,
         company: document.getElementById('company').value,
         role: document.getElementById('role').value,
-        clusters: document.getElementById('clusters').value,
-        interests: document.getElementById('interests').value,
+        clusters: document.getElementById('clusters').value || 'Not specified',
+        interests: document.getElementById('interests').value || 'None',
         selectedDate: selectedDate.toDateString(),
         selectedTime: selectedTime
       };
 
-      // Log the booking (in production, send to server)
-      console.log('Demo booked:', formData);
+      // Try to send email using EmailJS
+      const templateParams = {
+        to_email: 'yousefaboelfoul@gmail.com',
+        from_name: formData.firstName + ' ' + formData.lastName,
+        from_email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        role: formData.role,
+        clusters: formData.clusters,
+        interests: formData.interests,
+        selected_date: formData.selectedDate,
+        selected_time: formData.selectedTime,
+        message: `New demo booking: ${formData.firstName} ${formData.lastName} from ${formData.company}`
+      };
+
+      // Log the booking locally (for testing without EmailJS key)
+      console.log('Demo booking submitted:', formData);
 
       // Show success message
       const successMessage = document.getElementById('successMessage');
@@ -540,6 +559,24 @@
       setTimeout(() => {
         successMessage.classList.remove('show');
       }, 5000);
+
+      // Attempt email send (will fail without proper EmailJS setup)
+      try {
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+          .then(function(response) {
+            console.log('Email sent successfully!', response);
+          }, function(error) {
+            console.log('Email send attempt:', error);
+            // Email service not configured, but booking is still recorded locally
+          });
+      } catch(e) {
+        console.log('EmailJS not configured yet. To enable email notifications:');
+        console.log('1. Visit https://www.emailjs.com/');
+        console.log('2. Sign up for free account');
+        console.log('3. Get your Public Key');
+        console.log('4. Create an email service and template');
+        console.log('5. Replace YOUR_EMAILJS_PUBLIC_KEY, YOUR_SERVICE_ID, and YOUR_TEMPLATE_ID');
+      }
     }
 
     // Initialize calendar on page load

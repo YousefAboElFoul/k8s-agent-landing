@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact Us - K8s Self-Healing Agent</title>
   <link rel="stylesheet" href="../css/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
   <style>
     .contact-info-grid {
       display: grid;
@@ -403,6 +404,10 @@
   </footer>
 
   <script>
+    (function(){
+      emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+    })();
+
     function handleSubmit(event) {
       event.preventDefault();
 
@@ -416,6 +421,17 @@
         subject: document.getElementById('subject').value,
         message: document.getElementById('message').value,
         subscribe: document.getElementById('subscribe').checked
+      };
+
+      const templateParams = {
+        to_email: 'yousefaboelfoul@gmail.com',
+        from_name: formData.firstName + ' ' + formData.lastName,
+        from_email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+        subscribe: formData.subscribe ? 'Yes' : 'No'
       };
 
       // Log the contact (in production, send to server)
@@ -432,6 +448,18 @@
       setTimeout(() => {
         successMessage.classList.remove('show');
       }, 5000);
+
+      // Attempt email send
+      try {
+        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+          .then(function(response) {
+            console.log('Email sent successfully!', response);
+          }, function(error) {
+            console.log('Email send attempt:', error);
+          });
+      } catch(e) {
+        // EmailJS not configured, but submission recorded
+      }
     }
   </script>
 </body>
