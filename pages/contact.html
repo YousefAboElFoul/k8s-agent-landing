@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us - K8s Self-Healing Agent</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .contact-info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .contact-info-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      text-align: center;
+    }
+
+    .contact-info-card .icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-info-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      color: var(--primary-color);
+    }
+
+    .contact-info-card p {
+      color: #666;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-info-card a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .contact-info-card a:hover {
+      color: var(--secondary-color);
+    }
+
+    .form-container {
+      background: white;
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.75rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .success-message {
+      background: #d1fae5;
+      border: 2px solid var(--success-color);
+      color: #047857;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .social-link {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--primary-gradient);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .social-link:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="navbar">
+      <div class="logo">K8s Agent</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="cta-button">Book a Demo</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" style="min-height: 400px;">
+    <h1>Get in Touch</h1>
+    <p>We're here to help. Reach out with questions or feedback.</p>
+  </section>
+
+  <!-- Contact Info Section -->
+  <section style="background: white; padding: 3rem 2rem;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Contact Information</h2>
+      <div class="contact-info-grid">
+        <div class="contact-info-card">
+          <div class="icon">💬</div>
+          <h3>Sales & Demo</h3>
+          <p>Want to see K8s Agent in action?</p>
+          <a href="booking.html">Book a demo</a>
+          <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="mailto:sales@k8sagent.io">sales@k8sagent.io</a></p>
+        </div>
+        <div class="contact-info-card">
+          <div class="icon">🆘</div>
+          <h3>Support</h3>
+          <p>Need technical help?</p>
+          <a href="#">Contact Support</a>
+          <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="mailto:support@k8sagent.io">support@k8sagent.io</a></p>
+        </div>
+        <div class="contact-info-card">
+          <div class="icon">🤝</div>
+          <h3>Partnerships</h3>
+          <p>Interested in partnering?</p>
+          <a href="#">Explore Partnership</a>
+          <p style="margin-top: 1rem; font-size: 0.9rem;"><a href="mailto:partners@k8sagent.io">partners@k8sagent.io</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section style="background: #f9fafb;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Send us a Message</h2>
+      <div class="form-container">
+        <div class="success-message" id="successMessage">
+          <strong>✓ Message sent!</strong> We'll get back to you within 24 hours.
+        </div>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="company">Company Name *</label>
+            <input type="text" id="company" name="company" required>
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject *</label>
+            <select id="subject" name="subject" required>
+              <option value="">Select a subject...</option>
+              <option value="sales">Sales Inquiry</option>
+              <option value="demo">Schedule a Demo</option>
+              <option value="support">Technical Support</option>
+              <option value="feedback">Product Feedback</option>
+              <option value="partnership">Partnership</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" placeholder="Tell us how we can help..." required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label style="display: flex; align-items: center; gap: 0.5rem;">
+              <input type="checkbox" id="subscribe" name="subscribe">
+              <span>Keep me updated on product news and features</span>
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Office Locations -->
+  <section style="background: white;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 3rem;">Office Locations</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>San Francisco, CA</h3>
+          <p style="color: #666; margin: 1rem 0;">
+            123 Tech Avenue<br>
+            San Francisco, CA 94105<br>
+            United States
+          </p>
+          <p style="color: #666;"><strong>Phone:</strong> +1 (415) 555-0123</p>
+        </div>
+        <div class="card">
+          <h3>Remote-First</h3>
+          <p style="color: #666; margin: 1rem 0;">
+            We're a distributed team across North America and Europe. Our support and sales teams are available globally.
+          </p>
+          <p style="color: #666;"><strong>Hours:</strong> Monday-Friday, 9 AM - 6 PM EST</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section style="background: #f9fafb;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 3rem;">Frequently Asked Questions</h2>
+      <div class="grid cols-1">
+        <div class="card">
+          <h3>What's the best way to reach your sales team?</h3>
+          <p>The fastest way is to book a demo using our booking system. If you prefer email, reach out to sales@k8sagent.io. We usually respond within 24 hours.</p>
+        </div>
+        <div class="card">
+          <h3>Do you offer phone support?</h3>
+          <p>For Hosted and Enterprise customers, yes. Community/Open Source users have access to our GitHub discussions and community forum.</p>
+        </div>
+        <div class="card">
+          <h3>What's your typical response time?</h3>
+          <p>Sales inquiries: 24 hours. Enterprise support: 1 hour. Community forum: 2-3 days (volunteer-based). Premium support: within 30 minutes.</p>
+        </div>
+        <div class="card">
+          <h3>Can I get a custom demo?</h3>
+          <p>Absolutely! Book a demo and tell us about your specific use case. Our team will customize the demo to show how K8s Agent solves your challenges.</p>
+        </div>
+        <div class="card">
+          <h3>Do you have a community forum?</h3>
+          <p>Yes! We have an active Slack community and GitHub discussions where you can connect with other users, share experiences, and get help.</p>
+        </div>
+        <div class="card">
+          <h3>How can I provide product feedback?</h3>
+          <p>We'd love to hear it! You can submit feedback through this form, on our GitHub roadmap, or directly to our product team at product@k8sagent.io.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social Links -->
+  <section style="background: white; text-align: center; padding: 3rem 2rem;">
+    <h2 style="margin-bottom: 1.5rem;">Follow Us</h2>
+    <div class="social-links">
+      <a href="#" class="social-link" title="GitHub">
+        <span style="font-size: 1.8rem;">⚙️</span>
+      </a>
+      <a href="#" class="social-link" title="Twitter">
+        <span style="font-size: 1.8rem;">𝕏</span>
+      </a>
+      <a href="#" class="social-link" title="LinkedIn">
+        <span style="font-size: 1.8rem;">💼</span>
+      </a>
+      <a href="#" class="social-link" title="Slack Community">
+        <span style="font-size: 1.8rem;">💬</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section style="background: var(--primary-gradient); color: white; text-align: center; padding: 3rem 2rem;">
+    <h2 style="color: white; margin-bottom: 1rem;">Ready to Get Started?</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 2rem;">Let's talk about how K8s Agent can transform your Kubernetes operations</p>
+    <a href="booking.html" class="cta-button" style="display: inline-block;">Schedule a Demo</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="booking.html">Demo</a></li>
+          <li><a href="#">Documentation</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 K8s Self-Healing Agent. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      // Get form data
+      const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        company: document.getElementById('company').value,
+        subject: document.getElementById('subject').value,
+        message: document.getElementById('message').value,
+        subscribe: document.getElementById('subscribe').checked
+      };
+
+      // Log the contact (in production, send to server)
+      console.log('Contact form submitted:', formData);
+
+      // Show success message
+      const successMessage = document.getElementById('successMessage');
+      successMessage.classList.add('show');
+
+      // Reset form
+      document.getElementById('contactForm').reset();
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMessage.classList.remove('show');
+      }, 5000);
+    }
+  </script>
+</body>
+</html>

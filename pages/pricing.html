@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing - K8s Self-Healing Agent</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      margin-top: 2rem;
+    }
+
+    .comparison-table th {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 1.5rem;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    .comparison-table td {
+      padding: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table td:first-child {
+      font-weight: 600;
+      background: #f9fafb;
+    }
+
+    .feature-check {
+      color: var(--success-color);
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .feature-cross {
+      color: #ccc;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .faq-item {
+      margin-bottom: 1.5rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+
+    .faq-item h3 {
+      color: var(--primary-color);
+      margin-bottom: 0.75rem;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-item p {
+      color: #666;
+      display: none;
+    }
+
+    .faq-item p.show {
+      display: block;
+    }
+
+    .toggle-arrow {
+      font-size: 1.5rem;
+      transition: transform 0.3s;
+    }
+
+    .toggle-arrow.rotate {
+      transform: rotate(180deg);
+    }
+
+    .addon-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .addon-card {
+      border: 2px solid #e5e7eb;
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: all 0.3s;
+    }
+
+    .addon-card:hover {
+      border-color: var(--primary-color);
+      box-shadow: 0 10px 25px rgba(79, 70, 229, 0.1);
+    }
+
+    .addon-price {
+      font-size: 1.5rem;
+      color: var(--primary-color);
+      font-weight: bold;
+      margin: 0.75rem 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="navbar">
+      <div class="logo">K8s Agent</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="booking.html" class="cta-button">Book a Demo</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" style="min-height: 500px;">
+    <h1>Simple, Transparent Pricing</h1>
+    <p>No hidden fees. No surprises. Choose the plan that fits your team.</p>
+  </section>
+
+  <!-- Pricing Plans -->
+  <section style="background: white; padding: 3rem 2rem;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+        <!-- Open Source Plan -->
+        <div class="pricing-card">
+          <h3 style="font-size: 1.5rem;">Open Source</h3>
+          <p style="color: #666; margin: 0.5rem 0 1.5rem;">Self-hosted • Free forever</p>
+          <div class="price">$0<span class="price-period">/month</span></div>
+          <p style="color: #666; margin-bottom: 2rem;">Unlimited clusters, unlimited monitoring</p>
+          <ul class="features-list">
+            <li>All core monitoring features</li>
+            <li>Pod auto-restart & scaling</li>
+            <li>Custom healing rules</li>
+            <li>Slack/Email notifications</li>
+            <li>YAML configuration</li>
+            <li>Community support</li>
+            <li>MIT License</li>
+            <li>Self-hosted on your cluster</li>
+          </ul>
+          <a href="#" class="cta-button" style="display: block; text-align: center; margin-top: 1.5rem;">View on GitHub</a>
+        </div>
+
+        <!-- Hosted Plan (Featured) -->
+        <div class="pricing-card featured">
+          <h3 style="font-size: 1.5rem;">Hosted</h3>
+          <p style="color: #666; margin: 0.5rem 0 1.5rem;">Managed service • Best for teams</p>
+          <div class="price">$99<span class="price-period">/cluster/mo</span></div>
+          <p style="color: #666; margin-bottom: 2rem;">Fully managed, we handle infrastructure</p>
+          <ul class="features-list">
+            <li>Everything in Open Source</li>
+            <li>We host and maintain infrastructure</li>
+            <li>AI-powered root cause analysis</li>
+            <li>Multi-cluster dashboard</li>
+            <li>Advanced analytics & reporting</li>
+            <li>Priority support (24/7)</li>
+            <li>99.9% uptime SLA</li>
+            <li>Automatic updates</li>
+            <li>Custom integrations</li>
+          </ul>
+          <a href="booking.html" class="cta-button" style="display: block; text-align: center; margin-top: 1.5rem; background: white; color: var(--primary-color); border: 2px solid white;">Start Free Trial</a>
+        </div>
+
+        <!-- Enterprise Plan -->
+        <div class="pricing-card">
+          <h3 style="font-size: 1.5rem;">Enterprise</h3>
+          <p style="color: #666; margin: 0.5rem 0 1.5rem;">Custom solution • Large teams</p>
+          <div class="price">Custom<span class="price-period"></span></div>
+          <p style="color: #666; margin-bottom: 2rem;">Tailored to your specific needs</p>
+          <ul class="features-list">
+            <li>Everything in Hosted</li>
+            <li>Dedicated account manager</li>
+            <li>Custom SLA agreements</li>
+            <li>On-premise deployment option</li>
+            <li>Advanced security features</li>
+            <li>Custom integrations</li>
+            <li>Training & onboarding</li>
+            <li>Compliance (SOC 2, HIPAA)</li>
+            <li>White-label options</li>
+          </ul>
+          <a href="contact.html" class="cta-button" style="display: block; text-align: center; margin-top: 1.5rem;">Contact Sales</a>
+        </div>
+      </div>
+
+      <!-- Additional Info -->
+      <div style="background: #f0f4ff; padding: 2rem; border-radius: 12px; text-align: center;">
+        <p style="margin: 0; color: var(--primary-color); font-weight: 600;">💡 All plans include 14-day free trial • No credit card required</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add-ons Section -->
+  <section style="background: #f9fafb;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 1rem;">Premium Add-ons</h2>
+      <p style="text-align: center; color: #666; margin-bottom: 2rem;">Enhance your K8s Agent with additional features</p>
+      
+      <div class="addon-grid">
+        <div class="addon-card">
+          <h3>Advanced Analytics</h3>
+          <p style="color: #666;">Deep insights into pod failures and trends</p>
+          <div class="addon-price">$49<span style="font-size: 0.9rem; color: #666;">/month</span></div>
+          <p style="color: #666; font-size: 0.9rem;">Custom dashboards, trend analysis, forecasting</p>
+        </div>
+        <div class="addon-card">
+          <h3>On-Premise Hosting</h3>
+          <p style="color: #666;">Host K8s Agent in your own infrastructure</p>
+          <div class="addon-price">Contact</div>
+          <p style="color: #666; font-size: 0.9rem;">Custom pricing, dedicated support</p>
+        </div>
+        <div class="addon-card">
+          <h3>Priority Support</h3>
+          <p style="color: #666;">Dedicated support channel with SLA</p>
+          <div class="addon-price">$199<span style="font-size: 0.9rem; color: #666;">/month</span></div>
+          <p style="color: #666; font-size: 0.9rem;">1-hour response time, dedicated account manager</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Table -->
+  <section style="background: white; padding: 3rem 2rem;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Feature Comparison</h2>
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Open Source</th>
+            <th>Hosted</th>
+            <th>Enterprise</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Pod Monitoring</td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Auto Pod Restart</td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>AI Root Cause Analysis</td>
+            <td><span class="feature-cross">✗</span></td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Custom Rules (YAML)</td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Slack Notifications</td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Multi-cluster Dashboard</td>
+            <td><span class="feature-cross">✗</span></td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Advanced Analytics</td>
+            <td><span class="feature-cross">✗</span></td>
+            <td><span class="feature-check">✓ (Add-on)</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Priority Support</td>
+            <td>Community</td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓ (24/7)</span></td>
+          </tr>
+          <tr>
+            <td>Uptime SLA</td>
+            <td>N/A</td>
+            <td>99.9%</td>
+            <td>99.99%</td>
+          </tr>
+          <tr>
+            <td>On-Premise Option</td>
+            <td><span class="feature-cross">✗</span></td>
+            <td><span class="feature-cross">✗</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Compliance (SOC 2)</td>
+            <td><span class="feature-cross">✗</span></td>
+            <td><span class="feature-check">✓</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+          <tr>
+            <td>Custom Integrations</td>
+            <td>DIY</td>
+            <td><span class="feature-check">✓ (Add-on)</span></td>
+            <td><span class="feature-check">✓</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section style="background: #f9fafb;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 2rem;">Pricing FAQ</h2>
+      <div class="grid cols-1">
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            How does the Hosted plan pricing work?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>The Hosted plan is $99 per cluster per month. If you have 3 clusters, it's $297/month total. Each cluster can have unlimited nodes and pods. Volume discounts are available for 10+ clusters.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            Can I use the Open Source version in production?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>Absolutely! The Open Source version includes all core features and is MIT licensed. Many enterprises run it in production. The Hosted version just adds management, AI analysis, and multi-cluster dashboards.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            Is there a minimum contract length?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>No! There's no lock-in. Cancel anytime. Most customers stick around because they save money on incidents and engineer hours.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            What payment methods do you accept?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>We accept all major credit cards and wire transfers. Annual billing is also available with a 15% discount. Contact our sales team for enterprise payment options.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            Can I downgrade or upgrade my plan?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>Yes! You can change your plan anytime. Upgrades take effect immediately. For downgrades, they take effect at the start of the next billing cycle.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            Do you offer discounts for annual billing?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>Yes! Annual billing includes a 15% discount. Non-profits and educational institutions qualify for additional discounts. Contact sales for details.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            What's included in the free trial?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>The 14-day free trial gives you full access to the Hosted plan with all features. No credit card required. After the trial, you choose to upgrade, downgrade, or stick with the free Open Source version.</p>
+        </div>
+
+        <div class="faq-item">
+          <h3 onclick="toggleFaq(this)">
+            How much will this actually save us?
+            <span class="toggle-arrow">▼</span>
+          </h3>
+          <p>The average customer saves $15,000-$40,000 per year in prevented incidents and engineer hours. Most see ROI within 2-3 months. Let's discuss your specific situation in a demo!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section style="background: var(--primary-gradient); color: white; text-align: center; padding: 3rem 2rem;">
+    <h2 style="color: white; margin-bottom: 1rem;">Ready to Transform Your Kubernetes Operations?</h2>
+    <p style="font-size: 1.1rem; margin-bottom: 2rem;">Start your free 14-day trial. No credit card required.</p>
+    <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+      <a href="booking.html" class="cta-button">Book a Demo</a>
+      <a href="contact.html" class="cta-button secondary">Contact Sales</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="booking.html">Demo</a></li>
+          <li><a href="#">Documentation</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">GitHub</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 K8s Self-Healing Agent. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleFaq(element) {
+      const arrow = element.querySelector('.toggle-arrow');
+      const answer = element.nextElementSibling;
+      
+      arrow.classList.toggle('rotate');
+      answer.classList.toggle('show');
+    }
+  </script>
+</body>
+</html>

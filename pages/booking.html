@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Demo - K8s Self-Healing Agent</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .calendar {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .calendar-header button {
+      background: var(--primary-gradient);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform 0.2s;
+    }
+
+    .calendar-header button:hover {
+      transform: scale(1.05);
+    }
+
+    .calendar-header h3 {
+      font-size: 1.3rem;
+      color: var(--dark);
+    }
+
+    .weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .weekday {
+      text-align: center;
+      font-weight: 600;
+      color: #666;
+      padding: 0.5rem;
+      font-size: 0.85rem;
+    }
+
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 0.5rem;
+    }
+
+    .day {
+      aspect-ratio: 1;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-weight: 600;
+      background: white;
+    }
+
+    .day:hover:not(.empty):not(.disabled) {
+      border-color: var(--primary-color);
+      background: #f0f4ff;
+    }
+
+    .day.selected {
+      background: var(--primary-gradient);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .day.empty {
+      cursor: default;
+      color: #ccc;
+    }
+
+    .day.disabled {
+      color: #ccc;
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .times-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .time-slot {
+      padding: 0.75rem 1rem;
+      border: 2px solid #e5e7eb;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: white;
+      font-weight: 600;
+    }
+
+    .time-slot:hover {
+      border-color: var(--primary-color);
+      background: #f0f4ff;
+    }
+
+    .time-slot.selected {
+      background: var(--primary-gradient);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .time-slot.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      color: #ccc;
+    }
+
+    .form-section {
+      background: #f9fafb;
+      padding: 2rem;
+      border-radius: 12px;
+      margin-top: 2rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .submit-btn {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s;
+      width: 100%;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .success-message {
+      background: #d1fae5;
+      border: 2px solid var(--success-color);
+      color: #047857;
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      display: none;
+    }
+
+    .success-message.show {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="navbar">
+      <div class="logo">K8s Agent</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" style="min-height: 400px;">
+    <h1>Book Your Free Demo</h1>
+    <p>See how K8s Agent can transform your Kubernetes operations. 30-minute personalized demo with our team.</p>
+  </section>
+
+  <!-- Booking Section -->
+  <section style="background: white; padding: 3rem 2rem;">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 3rem;">
+        <!-- Calendar -->
+        <div>
+          <h2 style="margin-bottom: 1.5rem;">Select a Date</h2>
+          <div class="calendar">
+            <div class="calendar-header">
+              <button onclick="previousMonth()" style="background: white; color: var(--dark); border: 2px solid #e5e7eb;">← Prev</button>
+              <h3 id="monthYear"></h3>
+              <button onclick="nextMonth()">Next →</button>
+            </div>
+            <div class="weekdays">
+              <div class="weekday">Sun</div>
+              <div class="weekday">Mon</div>
+              <div class="weekday">Tue</div>
+              <div class="weekday">Wed</div>
+              <div class="weekday">Thu</div>
+              <div class="weekday">Fri</div>
+              <div class="weekday">Sat</div>
+            </div>
+            <div class="days" id="calendarDays"></div>
+          </div>
+        </div>
+
+        <!-- Time Slots -->
+        <div>
+          <h2 style="margin-bottom: 1.5rem;">Select a Time (EST)</h2>
+          <div id="timeSlots" style="background: white; padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);">
+            <p style="color: #666; margin-bottom: 1.5rem;">Choose a date first</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="form-section">
+        <h2 style="margin-bottom: 1.5rem;">Your Information</h2>
+        <div class="success-message" id="successMessage">
+          <strong>✓ Demo booked successfully!</strong> Check your email for confirmation details.
+        </div>
+        <form id="bookingForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name *</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name *</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number *</label>
+              <input type="tel" id="phone" name="phone" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="company">Company Name *</label>
+              <input type="text" id="company" name="company" required>
+            </div>
+            <div class="form-group">
+              <label for="role">Job Title *</label>
+              <input type="text" id="role" name="role" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="clusters">How many Kubernetes clusters do you manage?</label>
+            <select id="clusters" name="clusters">
+              <option value="">Select one...</option>
+              <option value="1">1</option>
+              <option value="2-5">2-5</option>
+              <option value="6-10">6-10</option>
+              <option value="10+">10+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="interests">What interests you most? (optional)</label>
+            <textarea id="interests" name="interests" rows="4" placeholder="Tell us about your biggest Kubernetes pain points..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>
+              <input type="checkbox" id="terms" name="terms" required>
+              I agree to be contacted about my demo booking
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn">Book My Demo</button>
+        </form>
+      </div>
+
+      <!-- Info Cards -->
+      <div class="grid cols-3" style="margin-top: 3rem;">
+        <div class="card">
+          <div class="card-icon">⏱️</div>
+          <h3>30 Minutes</h3>
+          <p>Perfect amount of time for a thorough product overview and Q&A</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">👥</div>
+          <h3>1-on-1 Coaching</h3>
+          <p>Dedicated demo with our product specialist</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💬</div>
+          <h3>Custom Discussion</h3>
+          <p>We'll tailor the demo to your specific use case</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section style="background: #f9fafb;">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 3rem;">Frequently Asked Questions</h2>
+      <div class="grid cols-1">
+        <div class="card">
+          <h3>What should I prepare for the demo?</h3>
+          <p>Just bring your questions! We'll walk you through how K8s Agent integrates with your specific cluster setup. If you can share your cluster size and current monitoring stack, we can customize the demo even more.</p>
+        </div>
+        <div class="card">
+          <h3>How does the demo work?</h3>
+          <p>We'll show you a live demo of K8s Agent in action, walk through key features, discuss your use case, and answer any technical questions. You'll get a custom pricing proposal tailored to your needs.</p>
+        </div>
+        <div class="card">
+          <h3>Can I get a free trial?</h3>
+          <p>Yes! After your demo, we offer a 14-day free trial of our hosted platform. No credit card required to start.</p>
+        </div>
+        <div class="card">
+          <h3>What happens after I book?</h3>
+          <p>You'll receive a confirmation email with Zoom details, calendar invite, and a pre-demo questionnaire. We'll reach out 24 hours before to confirm.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="../index.html#features">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">API Docs</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 K8s Self-Healing Agent. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    let selectedDate = null;
+    let selectedTime = null;
+    let currentMonth = new Date();
+
+    const timeSlots = [
+      "9:00 AM", "9:30 AM", "10:00 AM", "10:30 AM",
+      "11:00 AM", "11:30 AM", "2:00 PM", "2:30 PM",
+      "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM",
+      "5:00 PM"
+    ];
+
+    function renderCalendar() {
+      const year = currentMonth.getFullYear();
+      const month = currentMonth.getMonth();
+
+      // Update header
+      const options = { month: 'long', year: 'numeric' };
+      document.getElementById('monthYear').textContent = currentMonth.toLocaleDateString('en-US', options);
+
+      // Get first day and number of days
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Clear calendar
+      const calendarDays = document.getElementById('calendarDays');
+      calendarDays.innerHTML = '';
+
+      // Add empty cells for days before month starts
+      for (let i = 0; i < firstDay; i++) {
+        const emptyDay = document.createElement('div');
+        emptyDay.className = 'day empty';
+        calendarDays.appendChild(emptyDay);
+      }
+
+      // Add days of the month
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      for (let day = 1; day <= daysInMonth; day++) {
+        const dayElement = document.createElement('div');
+        dayElement.className = 'day';
+        dayElement.textContent = day;
+
+        const dateObj = new Date(year, month, day);
+        dateObj.setHours(0, 0, 0, 0);
+
+        // Disable past dates and weekends
+        if (dateObj < today || dateObj.getDay() === 0 || dateObj.getDay() === 6) {
+          dayElement.classList.add('disabled');
+        } else {
+          dayElement.onclick = () => selectDate(dateObj, dayElement);
+        }
+
+        // Highlight selected date
+        if (selectedDate && dateObj.getTime() === selectedDate.getTime()) {
+          dayElement.classList.add('selected');
+        }
+
+        calendarDays.appendChild(dayElement);
+      }
+    }
+
+    function selectDate(dateObj, element) {
+      selectedDate = dateObj;
+      selectedTime = null;
+
+      // Update UI
+      document.querySelectorAll('.day').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+
+      renderTimeSlots();
+    }
+
+    function renderTimeSlots() {
+      const timeSlotContainer = document.getElementById('timeSlots');
+      timeSlotContainer.innerHTML = '<div class="times-grid">';
+
+      timeSlots.forEach(time => {
+        const timeButton = document.createElement('div');
+        timeButton.className = 'time-slot';
+        timeButton.textContent = time;
+        timeButton.onclick = () => selectTime(time, timeButton);
+
+        if (selectedTime === time) {
+          timeButton.classList.add('selected');
+        }
+
+        timeSlotContainer.querySelector('.times-grid').appendChild(timeButton);
+      });
+
+      timeSlotContainer.innerHTML += '</div>';
+    }
+
+    function selectTime(time, element) {
+      selectedTime = time;
+      document.querySelectorAll('.time-slot').forEach(el => el.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    function previousMonth() {
+      currentMonth.setMonth(currentMonth.getMonth() - 1);
+      renderCalendar();
+    }
+
+    function nextMonth() {
+      currentMonth.setMonth(currentMonth.getMonth() + 1);
+      renderCalendar();
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+
+      if (!selectedDate || !selectedTime) {
+        alert('Please select a date and time for your demo');
+        return;
+      }
+
+      // Get form data
+      const formData = {
+        firstName: document.getElementById('firstName').value,
+        lastName: document.getElementById('lastName').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+        company: document.getElementById('company').value,
+        role: document.getElementById('role').value,
+        clusters: document.getElementById('clusters').value,
+        interests: document.getElementById('interests').value,
+        selectedDate: selectedDate.toDateString(),
+        selectedTime: selectedTime
+      };
+
+      // Log the booking (in production, send to server)
+      console.log('Demo booked:', formData);
+
+      // Show success message
+      const successMessage = document.getElementById('successMessage');
+      successMessage.classList.add('show');
+
+      // Reset form
+      document.getElementById('bookingForm').reset();
+      selectedDate = null;
+      selectedTime = null;
+      renderCalendar();
+      renderTimeSlots();
+
+      // Hide success message after 5 seconds
+      setTimeout(() => {
+        successMessage.classList.remove('show');
+      }, 5000);
+    }
+
+    // Initialize calendar on page load
+    document.addEventListener('DOMContentLoaded', renderCalendar);
+  </script>
+</body>
+</html>
