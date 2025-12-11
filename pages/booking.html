@@ -408,6 +408,7 @@
     ];
 
     function renderCalendar() {
+      console.log('renderCalendar called');
       const year = currentMonth.getFullYear();
       const month = currentMonth.getMonth();
 
@@ -421,6 +422,10 @@
 
       // Clear calendar
       const calendarDays = document.getElementById('calendarDays');
+      if (!calendarDays) {
+        console.error('calendarDays element not found');
+        return;
+      }
       calendarDays.innerHTML = '';
 
       // Add empty cells for days before month starts
@@ -456,6 +461,7 @@
 
         calendarDays.appendChild(dayElement);
       }
+      console.log('Calendar rendered with', daysInMonth, 'days');
     }
 
     function selectDate(dateObj, element) {
@@ -584,7 +590,11 @@
     }
 
     // Initialize calendar on page load
-    document.addEventListener('DOMContentLoaded', renderCalendar);
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderCalendar);
+    } else {
+      renderCalendar();
+    }
   </script>
 </body>
 </html>
