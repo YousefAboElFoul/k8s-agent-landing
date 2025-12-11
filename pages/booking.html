@@ -390,12 +390,7 @@
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
   <script>
-    (function(){
-      emailjs.init("nwFt9wWmaX1u-Wpvp");
-    })();
-
     let selectedDate = null;
     let selectedTime = null;
     let currentMonth = new Date();
@@ -594,6 +589,17 @@
       document.addEventListener('DOMContentLoaded', renderCalendar);
     } else {
       renderCalendar();
+    }
+  </script>
+
+  <!-- EmailJS Library -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+  <script>
+    // Initialize EmailJS after library loads
+    if (typeof emailjs !== 'undefined') {
+      emailjs.init("nwFt9wWmaX1u-Wpvp");
+    } else {
+      console.warn('EmailJS library failed to load');
     }
   </script>
 </body>
