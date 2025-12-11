@@ -565,23 +565,32 @@
         successMessage.classList.remove('show');
       }, 5000);
 
-      // Attempt email send (will fail without proper EmailJS setup)
-      try {
-        emailjs.send("service_7klzs0i", "template_8u2bhfd", templateParams)
-          .then(function(response) {
-            console.log('Email sent successfully!', response);
-          }, function(error) {
-            console.log('Email send attempt:', error);
-            // Email service not configured, but booking is still recorded locally
-          });
-      } catch(e) {
-        console.log('EmailJS not configured yet. To enable email notifications:');
-        console.log('1. Visit https://www.emailjs.com/');
-        console.log('2. Sign up for free account');
-        console.log('3. Get your Public Key');
-        console.log('4. Create an email service and template');
-        console.log('5. Replace YOUR_EMAILJS_PUBLIC_KEY, YOUR_SERVICE_ID, and YOUR_TEMPLATE_ID');
-      }
+      // Send email via EmailJS REST API (no CDN required)
+      (function(){
+        const payload = {
+          service_id: "service_7klzs0i",
+          template_id: "template_8u2bhfd",
+          user_id: "nwFt9wWmaX1u-Wpvp",
+          template_params: templateParams
+        };
+
+        fetch('https://api.emailjs.com/api/v1.0/email/send', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        })
+        .then(async (res) => {
+          if (res.ok) {
+            console.log('Email sent successfully via EmailJS REST');
+          } else {
+            const txt = await res.text().catch(()=>'');
+            console.error('EmailJS REST responded with error', res.status, txt);
+          }
+        })
+        .catch(err => {
+          console.error('Email send failed (network or CORS):', err);
+        });
+      })();
     }
 
     // Initialize calendar on page load
