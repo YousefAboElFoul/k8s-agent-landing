@@ -470,7 +470,10 @@
 
     function renderTimeSlots() {
       const timeSlotContainer = document.getElementById('timeSlots');
-      timeSlotContainer.innerHTML = '<div class="times-grid">';
+      timeSlotContainer.innerHTML = '';
+
+      const gridDiv = document.createElement('div');
+      gridDiv.className = 'times-grid';
 
       timeSlots.forEach(time => {
         const timeButton = document.createElement('div');
@@ -482,10 +485,10 @@
           timeButton.classList.add('selected');
         }
 
-        timeSlotContainer.querySelector('.times-grid').appendChild(timeButton);
+        gridDiv.appendChild(timeButton);
       });
 
-      timeSlotContainer.innerHTML += '</div>';
+      timeSlotContainer.appendChild(gridDiv);
     }
 
     function selectTime(time, element) {
