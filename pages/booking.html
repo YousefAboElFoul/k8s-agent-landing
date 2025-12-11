@@ -393,7 +393,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
   <script>
     (function(){
-      emailjs.init("YOUR_EMAILJS_PUBLIC_KEY"); // Will configure below
+      emailjs.init("nwFt9wWmaX1u-Wpvp");
     })();
   </script>
     let selectedTime = null;
@@ -562,7 +562,7 @@
 
       // Attempt email send (will fail without proper EmailJS setup)
       try {
-        emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+        emailjs.send("service_7klzs0i", "template_cjf3ilf", templateParams)
           .then(function(response) {
             console.log('Email sent successfully!', response);
           }, function(error) {
